@@ -6,7 +6,7 @@ from desktop_cat.animation import load_frames
 from desktop_cat.paths import IDLE_SHEET
 
 IDLE_FRAME_COUNT = 4
-IDLE_FRAME_MS = 167  # 6 FPS
+IDLE_FRAME_MS = 200  # 6 FPS
 
 
 class PetWindow(QWidget):
