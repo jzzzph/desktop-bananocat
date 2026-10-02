@@ -5,3 +5,4 @@ ASSETS_DIR = PROJECT_ROOT / "assets"
 
 IDLE_SHEET = ASSETS_DIR / "cat" / "idle.png"      # sprite sheet de la animación idle
 TRAY_ICON = ASSETS_DIR / "cat" / "cat_icon.png"   # ícono de la bandeja del sistema
+SPRINT_SHEET = ASSETS_DIR / "cat" / "sprint.png"  # sprite sheet de la animación sprint

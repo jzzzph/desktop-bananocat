@@ -1,5 +1,4 @@
-from PySide6.QtGui import QPixmap
-
+from PySide6.QtGui import QPixmap, QTransform
 
 def load_frames(sheet_path, frame_count):
     sheet = QPixmap(str(sheet_path))
@@ -23,6 +22,10 @@ def load_frames(sheet_path, frame_count):
         frames.append(frame)
 
     return frames
+
+def mirror_frames(frames):
+    flip = QTransform().scale(-1, 1)
+    return [frame.transformed(flip) for frame in frames]
 
 class Animation:
     def __init__(self, frames, frame_ms):
