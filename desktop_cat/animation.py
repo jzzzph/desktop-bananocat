@@ -23,3 +23,15 @@ def load_frames(sheet_path, frame_count):
         frames.append(frame)
 
     return frames
+
+class Animation:
+    def __init__(self, frames, frame_ms):
+        self.frames = frames
+        self.frame_ms = frame_ms
+        self.current_index = 0
+
+    def current_frame(self):
+        return self.frames[self.current_index]
+
+    def advance(self):
+        self.current_index = (self.current_index + 1) % len(self.frames)

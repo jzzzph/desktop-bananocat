@@ -1,6 +1,5 @@
 import sys
 from PySide6.QtWidgets import QApplication
-
 from desktop_cat.pet_window import PetWindow
 from desktop_cat.tray import TrayIcon
 

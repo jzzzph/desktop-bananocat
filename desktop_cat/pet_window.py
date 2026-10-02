@@ -2,10 +2,10 @@ from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtWidgets import QWidget, QLabel
 
-from desktop_cat.animation import load_frames
+from desktop_cat.animation import Animation, load_frames
 from desktop_cat.paths import IDLE_SHEET
 
-IDLE_FRAME_COUNT = 4
+IDLE_FRAME_COUNT = 6
 IDLE_FRAME_MS = 200  # 6 FPS
 
 
@@ -21,20 +21,23 @@ class PetWindow(QWidget):
         )
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
-        # Frames de la animación y frame actual
-        self.frames = load_frames(IDLE_SHEET, IDLE_FRAME_COUNT)
-        self.current_frame = 0
+        # Animación que se está reproduciendo
+        self.animation = Animation(
+            load_frames(IDLE_SHEET, IDLE_FRAME_COUNT),
+            IDLE_FRAME_MS,
+        )
 
         # Label que muestra el frame actual
         self.label = QLabel(self)
         self._show_current_frame()
-        self.label.resize(self.frames[0].size())
-        self.resize(self.frames[0].size())
+        frame_size = self.animation.current_frame().size()
+        self.label.resize(frame_size)
+        self.resize(frame_size)
 
         # Temporizador que avanza la animación
         self.timer = QTimer(self)
         self.timer.timeout.connect(self._next_frame)
-        self.timer.start(IDLE_FRAME_MS)
+        self.timer.start(self.animation.frame_ms)
 
         self._place_on_screen()
 
@@ -48,8 +51,8 @@ class PetWindow(QWidget):
         self.move(x, y)
 
     def _show_current_frame(self):
-        self.label.setPixmap(self.frames[self.current_frame])
+        self.label.setPixmap(self.animation.current_frame())
 
     def _next_frame(self):
-        self.current_frame = (self.current_frame + 1) % len(self.frames)
+        self.animation.advance()
         self._show_current_frame()

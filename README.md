@@ -43,14 +43,19 @@ Todos los sprites están dibujados por mí en [Pixelorama](https://pixelorama.or
 desktop-bananocat/
 ├── assets/
 │   └── cat/
-│       ├── cat.png          # sprite del gato
-│       └── cat_icon.png     # ícono de la bandeja del sistema
+│       ├── idle.png          # sprite sheet de la animación idle (4 frames)
+│       └── cat_icon.png      # ícono de la bandeja del sistema
+├── design/
+│   ├── v1/                   # primer diseño del bananocat
+│   ├── v2/                   # rediseño actual
+│   └── DESIGN_LOG.md         # historial de diseño
 ├── desktop_cat/
 │   ├── __init__.py
-│   ├── paths.py             # rutas centralizadas del proyecto
-│   ├── pet_window.py        # ventana transparente que muestra al gato
-│   └── tray.py              # ícono y menú de la bandeja del sistema
-├── main.py                  # punto de entrada: crea las piezas y arranca la app
+│   ├── animation.py          # carga de sprite sheets y clase Animation
+│   ├── paths.py              # rutas centralizadas del proyecto
+│   ├── pet_window.py         # ventana transparente que muestra al gato
+│   └── tray.py               # ícono y menú de la bandeja del sistema
+├── main.py
 └── requirements.txt
 ```
 
@@ -73,6 +78,15 @@ vivirá en módulos separados a medida que el proyecto crezca.
 - Organización del código en paquetes y módulos
 - Entornos virtuales y control de versiones con Git (tags por versión)
 
+**v0.2**
+- Sprite sheets y recorte de frames usando coordenadas
+- Animación con `QTimer` sin bloquear el event loop
+- Ciclos de animación con el operador módulo
+- Depuración con hipótesis y mediciones (`time.perf_counter`)
+- Fuente única de verdad para el estado de la animación
+- Separación entre lógica y presentación (clase `Animation`, duck typing)
+- Archivos fuente (`.pxo`) vs. assets exportados
+
 ## Instalación
 
 ```bash
@@ -94,7 +108,7 @@ Para cerrarlo: clic derecho en el ícono de la bandeja del sistema → **Salir**
 ## Roadmap
 
 - [x] v0.1: gato estático en el escritorio
-- [ ] v0.2: animación idle
+- [x] v0.2: animación idle
 - [ ] v0.3: caminar
 - [ ] v0.4: movimiento por el escritorio
 - [ ] v0.5: interacción con el mouse
